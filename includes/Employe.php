@@ -2,9 +2,9 @@
 class Employe
 {
     public $id, $nom, $prenom, $email, $pole, $poste, $date_emb, $statut;
-    // private static $id_e = 1;
     public function getId()
     {
+
         return $this->id;
     }
     public function getNom()
@@ -41,7 +41,6 @@ class Employe
     }
     public function __construct($id, $nom, $prenom, $email, $pole, $poste, $date_emb, $statut)
     {
-        // self::$id_e++;
         $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;

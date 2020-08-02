@@ -5,7 +5,7 @@ require '../includes/Employe.php';
 ?>
 <script>
 function confirmer() {
-  var res = confirm("Etes-vous sur de supprimer ?")
+  var res = alert(" Empolyer Supprimer avec succes !")
 }
 </script>
 <div class="container">
@@ -36,7 +36,6 @@ while (!feof($file)) {
     $unser = unserialize($read);
     $ligne = $unser;
     ?>
-    <tr class="text-center">
     <?php
 if (!empty($ligne)) {?>
       <td scope="row">

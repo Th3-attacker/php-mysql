@@ -38,8 +38,11 @@ function nav_item($lien, $titre)
       <ul class="navbar-nav mr-auto">
       <?=nav_item('../src/acceuil.php', 'Acceuil');?>
       <?=nav_item('../src/ajout.php', 'Ajouter un employé');?>
-      <?=nav_item('../securites/logout.php', 'Deconnecter');?> <?php echo ((isset($_SESSION['PROFILE'])) ? ($_SESSION['PROFILE']['username']) : "") ?>
+      <?=nav_item('../securite/logout.php', 'Deconnecter');?> <?php echo ((isset($_SESSION['PROFILE'])) ? ($_SESSION['PROFILE']['username']) : "") ?>
     </ul>
-    <?php require '../src/search.php';?>
+    <form class="form-inline my-2 my-lg-0" action="acceuil.php">
+      <input class="form-control mr-sm-2" type="search" placeholder="Rechercher ici" aria-label="Search">
+      <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Rechercher</button>
+    </form>
   </div>
   </nav>

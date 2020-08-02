@@ -1,29 +1,33 @@
 <?php
-$title = "Ajouter Employer";
-require '../includes/Employe.php';
+require '../includes/employe.php';
 require '../includes/header.php';
-//require '../securite/validation.php';
-if (isset($_POST['submit'])) {
-    $id = $_POST['id'];
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $email = $_POST['email'];
-    $pole = $_POST['pole'];
-    $poste = $_POST['poste'];
-    $date_emb = $_POST['date-emb'];
-    $statut = $_POST['statut'];
-    $em = new Employe($id, $nom, $prenom, $email, $pole, $poste, $date_emb, $statut);
-    $emp = serialize($em);
-
-    if (!$file = fopen("../docs/employes.txt", "a")) {
-        echo 'echec de l\'ouverture du fichier';
-    } else {
-        fputs($file, $emp . "\r\n");
-        fclose($file);
-        header('location:acceuil.php');
-    }
+if (!isset($_GET['id'])) {
+    header('location:acceuil.php');
+    exit();
 }
-?>
+$file = fopen('../docs/employes.txt', 'r+');
+$id = $_GET['id'];
+while ($read = fgets($file)) {
+    $unser = unserialize($read, ["allowed_classes" => true]);
+    $ligne = $unser;
+    // fclose($file);
+    if ($id == $ligne->getId()) {
+        if (!empty($_POST['submit'])) {
+            $id_m = $_POST['id'];
+            $nom_m = $_POST['nom'];
+            $prenom_m = $_POST['prenom'];
+            $email_m = $_POST['email'];
+            $pole_m = $_POST['pole'];
+            $poste_m = $_POST['poste'];
+            $date_emb_m = $_POST['date-emb'];
+            $statut_m = $_POST['statut'];
+            $ligne = new Employe($id_m, $nom_m, $prenom_m, $email_m, $pole_m, $poste_m, $date_emb_m, $statut_m);
+            $emp = serialize($ligne);
+            $file = fopen("../docs/employes.txt", "w+");
+            fputs($file, $emp . "\r\n");
+            header('location:acceuil.php');
+        } else {
+            ?>
 
 <div class="container d-flex justify-content-center mt-4">
     <div class="card mb-4 mt-3 pr-2 pl-2"style="width: 50rem;">
@@ -40,21 +44,21 @@ if (isset($_POST['submit'])) {
                 <div class="form-row">
                     <div class="col">
                         <span style="color: red">*</span><label for="">id</label>
-                        <input type="text" name="id" id="id" class="form-control" placeholder="id">
+                        <input type="text" name="id" id="id" class="form-control" placeholder="id" value="<?=$ligne->getId()?>">
                     </div>
                     <div class="col">
                         <span style="color: red">*</span><label for="">nom</label>
-                        <input type="text" name="nom" id="nom" class="form-control" placeholder="nom" value="">
+                        <input type="text" name="nom" id="nom" class="form-control" placeholder="nom" value="<?=$ligne->getNom()?>">
                     </div>
                 </div>
                 <div class="form-row">
                 <div class="col">
                         <span style="color: red">*</span><label for="">Prenom</label>
-                        <input type="text" name="prenom" id="prenom" class="form-control" placeholder="prenom">
+                        <input type="text" name="prenom" id="prenom" class="form-control" placeholder="prenom" value="<?=$ligne->getPrenom()?>">
                     </div>
                     <div class="col">
                         <label for="">email</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="email ">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?=$ligne->getEmail()?>">
                     </div>
                 </div>
                 <div class="form-row">
@@ -62,32 +66,32 @@ if (isset($_POST['submit'])) {
                         <span style="color: red">*</span><label for="">pôle</label>
                         <select id="#" name="pole" class="form-control">
                           <option selected>Pôles</option>
-                          <option  name="Production">Production</option>
-                          <option  name="Commerciale">Commerciale</option>
-                          <option  name="Formation">Formation</option>
+                          <option name="Production">Production</option>
+                          <option name="Commerciale">Commerciale</option>
+                          <option name="Formation">Formation</option>
                         </select>
                     </div>
                     <div class="col">
                         <span style="color: red">*</span><label for="">poste</label>
                         <select id="#" name="poste"class="form-control">
                           <option selected>Poste</option>
-                          <option name="DG">DG</option>
-                          <option name="DRH">DRH</option>
-                          <option name="DAF">DAF</option>
+                          <option value="1" name="DG">DG</option>
+                          <option value="2" name="DRH">DRH</option>
+                          <option value="3" name="DAF">DAF</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                 <div class="col">
                         <span style="color: red">*</span><label for="">Date d'embauche</label>
-                        <input type="date" name="date-emb" id="date-emb" class="form-control" placeholder="date-emb">
+                        <input type="date" name="date-emb" id="date-emb" class="form-control" placeholder="date-emb" value="<?=$ligne->getDate_emb()?>">
                     </div>
                     <div class="col">
                         <span style="color: red">*</span><label for="">statut</label>
-                        <select id="#" name="statut"class="form-control">
+                        <select id="#" name="statut"class="form-control" >
                           <option selected>Statut</option>
-                          <option name="permenent">Permenent</option>
-                          <option name="No permenent">No Permenent</option>
+                          <option value="1" name="permenent">Permenent</option>
+                          <option value="2" name="No permenent">No Permenent</option>
                         </select>
                     </div>
                 </div>
@@ -104,4 +108,10 @@ if (isset($_POST['submit'])) {
 </div>
 
 
-<?php require '../includes/footer.php';?>
+
+  <?php
+}
+    }
+}
+
+require '../includes/footer.php';

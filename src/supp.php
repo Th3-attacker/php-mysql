@@ -1,5 +1,6 @@
 <?php
 $ligne = '';
+$erreur = "Bien supprimer";
 require '../includes/Employe.php';
 if (!isset($_GET['id'])) {
     header('location:acceuil.php');
@@ -18,7 +19,10 @@ while ($read = fgets($file)) {
     }
 }
 if (copy("../docs/tmp.txt", "../docs/employes.txt")) {
+
     header('location:acceuil.php');
+    echo " <div class= 'alert alert-danger' >" .
+        $erreur . "</di>";
 }
 fclose($file);
 fclose($file2);
