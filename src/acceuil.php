@@ -3,11 +3,6 @@ $title = "Acceuil";
 require '../includes/header.php';
 require '../includes/Employe.php';
 ?>
-<script>
-function confirmer() {
-  var res = alert(" Empolyer Supprimer avec succes !")
-}
-</script>
 <div class="container">
 <h1 class="text-center mt-4">Bienvenue Dans la Page D'Acceuil</h1>
 <div class="card-body bg-light">
@@ -50,7 +45,7 @@ if (!empty($ligne)) {?>
       <td><?=$ligne->getStatut();?></td>
       <td class="text-right">
       <a href="edit.php?id=<?=$ligne->getId();?>"><button class="btn btn-primary"><i class="far fa-edit"></i> Edit</button></a>
-      <a href="supp.php?id=<?=$ligne->getId();?>"><button class="btn btn-danger" onclick="confirmer()" ><i class="far fa-trash-alt"></i> Supprimer</button></a>
+      <a href="supp.php?id=<?=$ligne->getId();?>"><button class="btn btn-danger" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce employe ?');" ><i class="far fa-trash-alt"></i> Supprimer</button></a>
       </td>
     <?php }?>
     </tr>

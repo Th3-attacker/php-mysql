@@ -5,29 +5,36 @@ if (!isset($_GET['id'])) {
     header('location:acceuil.php');
     exit();
 }
-$file = fopen('../docs/employes.txt', 'r+');
+$file = fopen('../docs/employes.txt', 'r');
+$file3 = fopen('../docs/temps.txt', 'w+');
 $id = $_GET['id'];
 while ($read = fgets($file)) {
     $unser = unserialize($read, ["allowed_classes" => true]);
     $ligne = $unser;
-    // fclose($file);
     if ($id == $ligne->getId()) {
-        if (!empty($_POST['submit'])) {
-            $id_m = $_POST['id'];
-            $nom_m = $_POST['nom'];
-            $prenom_m = $_POST['prenom'];
-            $email_m = $_POST['email'];
-            $pole_m = $_POST['pole'];
-            $poste_m = $_POST['poste'];
-            $date_emb_m = $_POST['date-emb'];
-            $statut_m = $_POST['statut'];
-            $ligne = new Employe($id_m, $nom_m, $prenom_m, $email_m, $pole_m, $poste_m, $date_emb_m, $statut_m);
+        if (isset($_POST['submit'])) {
+            $id = $_POST['id'];
+            $nom = $_POST['nom'];
+            $prenom = $_POST['prenom'];
+            $email = $_POST['email'];
+            $pole = $_POST['pole'];
+            $poste = $_POST['poste'];
+            $date_emb = $_POST['date-emb'];
+            $statut = $_POST['statut'];
+            $ligne = new Employe($id, $nom, $prenom, $email, $pole, $poste, $date_emb, $statut);
             $emp = serialize($ligne);
-            $file = fopen("../docs/employes.txt", "w+");
-            fputs($file, $emp . "\r\n");
+            print_r($emp);
+            fputs($file3, $emp . "\r\n");
             header('location:acceuil.php');
-        } else {
-            ?>
+        }
+    } else {
+        continue;
+    }
+}
+?>
+
+
+
 
 <div class="container d-flex justify-content-center mt-4">
     <div class="card mb-4 mt-3 pr-2 pl-2"style="width: 50rem;">
@@ -95,7 +102,6 @@ while ($read = fgets($file)) {
                         </select>
                     </div>
                 </div>
-                <div class="container">
                     <div class="row">
                         <div class="col text-center mt-3">
                             <button type="submit" name="submit" value="Submit" class="btn btn-lg btn-success " id="bouton_envoi">Valider</button>
@@ -109,9 +115,9 @@ while ($read = fgets($file)) {
 
 
 
-  <?php
-}
-    }
-}
 
+
+
+<?php
 require '../includes/footer.php';
+?>
