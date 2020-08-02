@@ -6,19 +6,20 @@ if (!isset($_GET['id'])) {
     exit();
 }
 $file = fopen('../docs/employes.txt', 'r');
-$read = fgets($file);
-$unser = unserialize($read);
-$ligne = $unser;
+$file2 = fopen('../docs/tmp.txt', 'w+');
 $id = $_GET['id'];
-
-if ($id == $ligne->getId()) {
-    $read = fgets($file);
-    $unser = unserialize($read);
+while ($read = fgets($file)) {
+    $unser = unserialize($read, ["allowed_classes" => true]);
     $ligne = $unser;
-    $ligne = str_replace($ligne, '', $ligne);
-    $emp = serialize($ligne);
-    $write = fputs($file, $emp);
-
-} else {
-    echo "n'existe pas ";
+    if ($id == $ligne->getId()) {
+        continue;
+    } else {
+        fputs($file2, serialize($ligne) . "\r\n");
+    }
 }
+if (copy("../docs/tmp.txt", "../docs/employes.txt")) {
+    header('location:acceuil.php');
+}
+fclose($file);
+fclose($file2);
+unlink('../docs/tmp.txt');

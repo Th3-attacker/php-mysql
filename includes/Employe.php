@@ -1,7 +1,7 @@
 <?php
 class Employe
 {
-    private $id, $nom, $prenom, $email, $pole, $poste, $date_emb, $statut;
+    public $id, $nom, $prenom, $email, $pole, $poste, $date_emb, $statut;
     // private static $id_e = 1;
     public function getId()
     {
