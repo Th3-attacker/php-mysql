@@ -40,8 +40,8 @@ function nav_item($lien, $titre)
       <?=nav_item('../src/ajout.php', 'Ajouter un employé');?>
       <?=nav_item('../securite/logout.php', 'Deconnecter');?> <?php echo ((isset($_SESSION['PROFILE'])) ? ($_SESSION['PROFILE']['username']) : "") ?>
     </ul>
-    <form class="form-inline my-2 my-lg-0" action="acceuil.php">
-      <input class="form-control mr-sm-2" type="search" placeholder="Rechercher ici" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="../src/recherche.php">
+      <input class="form-control mr-sm-2" type="search" placeholder="Rechercher ici" aria-label="Search" name="recherche">
       <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Rechercher</button>
     </form>
   </div>

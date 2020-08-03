@@ -1,36 +1,44 @@
 <?php
+
 require '../includes/employe.php';
 require '../includes/header.php';
+require '../lib/outils.php';
+
 if (!isset($_GET['id'])) {
     header('location:acceuil.php');
     exit();
+} else {
+   $u_id = $_GET['id']; 
 }
-$file = fopen('../docs/employes.txt', 'r');
-$file3 = fopen('../docs/temps.txt', 'w+');
-$id = $_GET['id'];
-while ($read = fgets($file)) {
+
+if (isset($_POST['submit'])) {
+    $id = $_POST['id'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $email = $_POST['email'];
+    $pole = $_POST['pole'];
+    $poste = $_POST['poste'];
+    $date_emb = $_POST['date-emb'];
+    $statut = $_POST['statut'];
+    $employe = new Employe($id, $nom, $prenom, $email, $pole, $poste, $date_emb, $statut);
+    $id_seach = $u_id;
+    modify_info($id_seach, $employe);
+}
+
+$employe_file1 = fopen('../docs/employes.txt', 'r');
+$tmp_file1 = fopen('../docs/temps.txt', 'a+');
+
+while ($read = fgets($employe_file1)) {
     $unser = unserialize($read, ["allowed_classes" => true]);
     $ligne = $unser;
-    if ($id == $ligne->getId()) {
-        if (isset($_POST['submit'])) {
-            $id = $_POST['id'];
-            $nom = $_POST['nom'];
-            $prenom = $_POST['prenom'];
-            $email = $_POST['email'];
-            $pole = $_POST['pole'];
-            $poste = $_POST['poste'];
-            $date_emb = $_POST['date-emb'];
-            $statut = $_POST['statut'];
-            $ligne = new Employe($id, $nom, $prenom, $email, $pole, $poste, $date_emb, $statut);
-            $emp = serialize($ligne);
-            print_r($emp);
-            fputs($file3, $emp . "\r\n");
-            header('location:acceuil.php');
-        }
+    if ($u_id == $ligne->getId()) {
+        $employe = $ligne;
+        break;
     } else {
         continue;
     }
 }
+
 ?>
 
 
@@ -51,21 +59,21 @@ while ($read = fgets($file)) {
                 <div class="form-row">
                     <div class="col">
                         <span style="color: red">*</span><label for="">id</label>
-                        <input type="text" name="id" id="id" class="form-control" placeholder="id" value="<?=$ligne->getId()?>">
+                        <input type="text" name="id" id="id" class="form-control" placeholder="id" value="<?=$employe->getId()?>">
                     </div>
                     <div class="col">
                         <span style="color: red">*</span><label for="">nom</label>
-                        <input type="text" name="nom" id="nom" class="form-control" placeholder="nom" value="<?=$ligne->getNom()?>">
+                        <input type="text" name="nom" id="nom" class="form-control" placeholder="nom" value="<?=$employe->getNom()?>">
                     </div>
                 </div>
                 <div class="form-row">
                 <div class="col">
                         <span style="color: red">*</span><label for="">Prenom</label>
-                        <input type="text" name="prenom" id="prenom" class="form-control" placeholder="prenom" value="<?=$ligne->getPrenom()?>">
+                        <input type="text" name="prenom" id="prenom" class="form-control" placeholder="prenom" value="<?=$employe->getPrenom()?>">
                     </div>
                     <div class="col">
                         <label for="">email</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?=$ligne->getEmail()?>">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="email" value="<?=$employe->getEmail()?>">
                     </div>
                 </div>
                 <div class="form-row">
@@ -73,7 +81,7 @@ while ($read = fgets($file)) {
                         <span style="color: red">*</span><label for="">pôle</label>
                         <select id="#" name="pole" class="form-control">
                           <option selected>Pôles</option>
-                          <option name="Production">Production</option>
+                          <option name="Production" >Production</option>
                           <option name="Commerciale">Commerciale</option>
                           <option name="Formation">Formation</option>
                         </select>
@@ -91,14 +99,12 @@ while ($read = fgets($file)) {
                 <div class="form-row">
                 <div class="col">
                         <span style="color: red">*</span><label for="">Date d'embauche</label>
-                        <input type="date" name="date-emb" id="date-emb" class="form-control" placeholder="date-emb" value="<?=$ligne->getDate_emb()?>">
+                        <input type="date" name="date-emb" id="date-emb" class="form-control" placeholder="date-emb" value="<?=$employe->getDate_emb()?>">
                     </div>
                     <div class="col">
                         <span style="color: red">*</span><label for="">statut</label>
-                        <select id="#" name="statut"class="form-control" >
-                          <option selected>Statut</option>
-                          <option value="1" name="permenent">Permenent</option>
-                          <option value="2" name="No permenent">No Permenent</option>
+                        <select id="#" name="statut"class="form-control" >                          <option value="permenent" name="permenent">Permenent</option>
+                          <option value="No permenent" name="No permenent">No Permenent</option>
                         </select>
                     </div>
                 </div>

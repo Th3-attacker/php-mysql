@@ -1,2 +1,3 @@
-O:7:"Employe":8:{s:2:"id";s:1:"1";s:3:"nom";s:6:"elhadj";s:6:"prenom";s:5:"malik";s:5:"email";s:21:"haje.malik5@gmail.com";s:4:"pole";s:10:"Production";s:5:"poste";s:2:"DG";s:8:"date_emb";s:10:"2020-12-31";s:6:"statut";s:9:"Permenent";}
-O:7:"Employe":8:{s:2:"id";s:1:"2";s:3:"nom";s:6:"elhadj";s:6:"prenom";s:5:"malik";s:5:"email";s:21:"haje.malik5@gmail.com";s:4:"pole";s:10:"Production";s:5:"poste";s:3:"DAF";s:8:"date_emb";s:10:"2017-09-30";s:6:"statut";s:12:"No Permenent";}
+O:7:"Employe":8:{s:2:"id";s:1:"1";s:3:"nom";s:0:"";s:6:"prenom";s:0:"";s:5:"email";s:0:"";s:4:"pole";s:6:"Pôles";s:5:"poste";s:5:"Poste";s:8:"date_emb";s:0:"";s:6:"statut";s:6:"Statut";}
+O:7:"Employe":8:{s:2:"id";s:1:"2";s:3:"nom";s:0:"";s:6:"prenom";s:0:"";s:5:"email";s:0:"";s:4:"pole";s:6:"Pôles";s:5:"poste";s:5:"Poste";s:8:"date_emb";s:0:"";s:6:"statut";s:6:"Statut";}
+O:7:"Employe":8:{s:2:"id";s:1:"8";s:3:"nom";s:0:"";s:6:"prenom";s:0:"";s:5:"email";s:0:"";s:4:"pole";s:6:"Pôles";s:5:"poste";s:5:"Poste";s:8:"date_emb";s:0:"";s:6:"statut";s:9:"permenent";}

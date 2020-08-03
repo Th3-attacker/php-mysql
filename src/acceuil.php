@@ -24,15 +24,15 @@ require '../includes/Employe.php';
   <?php if (!$file = fopen('../docs/employes.txt', 'r')): ?>
   <?="echec de l'ouverture"?>
 <?php else: ?>
-  <?php
-while (!feof($file)) {
+<?php
+  while (!feof($file)) {
     $ligne = "";
     $read = fgets($file);
     $unser = unserialize($read);
     $ligne = $unser;
     ?>
     <?php
-if (!empty($ligne)) {?>
+  if (!empty($ligne)) { ?>
       <td scope="row">
       <?=$ligne->getId();?>
       </td>
@@ -47,7 +47,7 @@ if (!empty($ligne)) {?>
       <a href="edit.php?id=<?=$ligne->getId();?>"><button class="btn btn-primary"><i class="far fa-edit"></i> Edit</button></a>
       <a href="supp.php?id=<?=$ligne->getId();?>"><button class="btn btn-danger" onclick="return confirm('Etes-vous sûr de vouloir supprimer ce employe ?');" ><i class="far fa-trash-alt"></i> Supprimer</button></a>
       </td>
-    <?php }?>
+  <?php }?>
     </tr>
   <?php
 }
