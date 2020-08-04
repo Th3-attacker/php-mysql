@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: white;
+  font-family: "Times New Roman", Times, serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: xx-large;
+}
+
+.app_name {
+  text-align: center;
+  font-style: italic;
+  font-size: 60px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.app_t {
+  color: blue;
+  font-style: italic;
+  font-size: 60px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.app_a {
+  color: red;
+  font-style: italic;
+  font-size: 60px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.main-section {
+  margin: 0 auto;
+  margin-top: 130px;
+  padding: 0;
+}
+
+.modal-content {
+  background-color: white;
+  opacity: 0.8;
+  padding: 0 18px;
+  border-radius: 20px;
+  border-color: rgb(9, 230, 46);
+}
+
+.user-img img {
+  height: 120px;
+  width: 120px;
+}
+
+.user-img {
+  margin-top: -60px;
+  margin-bottom: 45px;
+}
+
+.form-group-login {
+  margin-bottom: 25px;
+}
+
+.form-group-login input {
+  height: 42px;
+  border-radius: 5px;
+  border: 8%;
+  font-size: 18px;
+  letter-spacing: 3px;
+  padding-left: 54px;
+}
+
+.form-group-login::before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f2bd";
+  position: absolute;
+  font-size: 22px;
+  left: 28px;
+  padding-top: 4px;
+  color: black;
+}
+
+.form-group-login:last-of-type::before {
+  content: "\f11c";
+}
+
+.form-input a {
+  width: 40%;
+  margin: 5px 0 25px;
+}
+
+.btn-outline-success {
+  background-color: #00d335;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 7px 14px;
+  border: 2px solid #ffffff;
+  color: white;
+}
+
+.btn-outline-success:hover {
+  background-color: #00d335;
+  border: 2px solid #daf1ff;
+}
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+  bottom: 0.5em;
+}
